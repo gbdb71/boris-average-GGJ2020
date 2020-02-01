@@ -20,8 +20,8 @@ public class ToolBox : MonoBehaviour
         mFilter = GetComponent<MeshFilter>();
         for (var i = 0; i < weights.Count; i++)
         {
-            totalWeight += weights[i];
             accumulatedWeights.Add(totalWeight);
+            totalWeight += weights[i];
         }
         Debug.Log("Test = " + string.Join(", ",
              accumulatedWeights
@@ -38,14 +38,26 @@ public class ToolBox : MonoBehaviour
     }
 
     private int GetNextIndex() {
-        int seed = Random.Range(0, totalWeight - 1);
-        Debug.Log(seed);
-        int index = accumulatedWeights.BinarySearch(seed);
-        Debug.Log((index >= 0) ? index : ~index - 1);
-        return (index >= 0) ? index : ~index - 1;
+        int seed = Random.Range(0, totalWeight);
+        for (var i = 0; i < accumulatedWeights.Count; i++)
+        {
+			if (seed == accumulatedWeights[i])
+            {
+                return i;
+			}
+            if (seed < accumulatedWeights[i]) {
+                int index = (i - 1 >= 0)?  i - 1 : 0;
+                return index;
+			}
+        }
+        return accumulatedWeights.Count - 1;
     }
 
     public void SetNextTool() {
         mFilter.mesh = meshes[GetNextIndex()];
+    }
+
+    public void SetNextTool(int index) {
+        mFilter.mesh = meshes[index];
     }
 }
