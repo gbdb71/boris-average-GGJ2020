@@ -23,10 +23,6 @@ public class ToolBox : MonoBehaviour
             accumulatedWeights.Add(totalWeight);
             totalWeight += weights[i];
         }
-        Debug.Log("Test = " + string.Join(", ",
-             accumulatedWeights
-             .ConvertAll(i => i.ToString())
-             .ToArray()));
     }
 
     void Update()
