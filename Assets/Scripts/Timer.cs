@@ -8,7 +8,7 @@ public class Timer : MonoBehaviour
 {
 
     [Header("Text")]
-    [SerializeField] private TextMeshProUGUI textTimer;
+    [SerializeField] private TextMeshProUGUI textTimer = null;
     [SerializeField] private char characterSplitter = ':';
 
     [Header("Logic")]
