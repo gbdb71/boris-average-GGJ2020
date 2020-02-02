@@ -1680,10 +1680,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d0a611534ca8421399842a8a6684015, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  meshes:
-  - {fileID: 5911550881477323651, guid: 7d3fd29859adeea48ba03a6593bb6505, type: 3}
-  - {fileID: 3007160364602161950, guid: 7d3fd29859adeea48ba03a6593bb6505, type: 3}
-  - {fileID: -3696471976411166322, guid: 7d3fd29859adeea48ba03a6593bb6505, type: 3}
   weights: 01000000050000000a000000
   handType: 1
 --- !u!1 &1920483028
@@ -1833,7 +1829,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 9a3ebf362e052430caf4a4efd39cf76c, type: 3}
+  m_Sprite: {fileID: 21300000, guid: be4bcb60bd6354b8fbf094ebd5fe1a04, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
