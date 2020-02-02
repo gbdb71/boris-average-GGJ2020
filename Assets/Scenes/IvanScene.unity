@@ -620,7 +620,7 @@ GameObject:
   - component: {fileID: 726851690}
   - component: {fileID: 726851689}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: ScoreText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1925,3 +1925,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 1977772665}
+  textScore: {fileID: 726851689}
