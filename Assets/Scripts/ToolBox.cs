@@ -14,6 +14,8 @@ public class ToolBox : MonoBehaviour
     private MeshFilter mFilter;
     private List<int> accumulatedWeights = new List<int>();
     private int totalWeight = 0;
+    public enum toolType { Empty, Tape, Gum, Sock }
+    public toolType handType = toolType.Tape;
 
     void Awake()
     {
@@ -23,14 +25,6 @@ public class ToolBox : MonoBehaviour
             accumulatedWeights.Add(totalWeight);
             totalWeight += weights[i];
         }
-    }
-
-    void Update()
-    {
-        if(Input.GetKeyDown(KeyCode.Space))
-        {
-            SetNextTool();
-		}
     }
 
     private int GetNextIndex() {
@@ -46,14 +40,35 @@ public class ToolBox : MonoBehaviour
                 return index;
 			}
         }
+        assignNewToolType(accumulatedWeights.Count - 1);
         return accumulatedWeights.Count - 1;
     }
 
-    public void SetNextTool() {
-        mFilter.mesh = meshes[GetNextIndex()];
+    public Mesh SetNextTool() {
+       return meshes[GetNextIndex()];
     }
 
-    public void SetNextTool(int index) {
-        mFilter.mesh = meshes[index];
+    public Mesh SetNextTool(int index) {
+       return meshes[index];
     }
+
+    private void assignNewToolType(int index) {
+        switch (index)
+        { 
+            case 0: handType = toolType.Empty;
+                break;
+            case 1:
+                handType = toolType.Tape;
+                break;
+            case 2:
+                handType = toolType.Sock;
+                break;
+            case 3:
+                handType = toolType.Gum;
+                break;
+            default:
+                break;
+        }
+    }
+
 }

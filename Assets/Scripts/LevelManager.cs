@@ -10,6 +10,7 @@ public class LevelManager : MonoBehaviour
     public Transform leakingsParent;
     public SpawnZone[] spawnZones;
     public GameObject leakingPrefab;
+    public Timer timerScript;
 
     public GameObject waterLevel;
     public GameObject acdc;
@@ -32,6 +33,7 @@ public class LevelManager : MonoBehaviour
         Time.timeScale = 1f;
         score = 0;
         numOfLeakings = 0;
+        timerScript.StartTimer();
 
         StartCoroutine(Spawner());
 
