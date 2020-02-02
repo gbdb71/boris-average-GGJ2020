@@ -14,22 +14,20 @@ public class LevelManager : MonoBehaviour
 
     public GameObject waterLevel;
     public GameObject acdc;
+    public HandsManager handsManagerScript;
+    public GameObject gameOverScreen;
 
     public float spawnDelay;
     private Transform waterlevelTransform;
     public int numOfLeakings;
     public float waterRaiseSpeed;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        gameInitiated = false;
-        waterlevelTransform = waterLevel.transform;
-        InitGame();
-    }
 
     public void InitGame()
     {
+        gameInitiated = false;
+        waterlevelTransform = waterLevel.transform;
+
         Time.timeScale = 1f;
         score = 0;
         numOfLeakings = 0;
@@ -38,6 +36,7 @@ public class LevelManager : MonoBehaviour
         StartCoroutine(Spawner());
 
         gameInitiated = true;
+        handsManagerScript.InitHandsmanager();
     }
 
     IEnumerator Spawner()
@@ -61,15 +60,19 @@ public class LevelManager : MonoBehaviour
 
     private void Update()
     {
-        waterlevelTransform.position = new Vector3(waterlevelTransform.position.x, waterlevelTransform.position.y + Time.deltaTime*waterRaiseSpeed*numOfLeakings, waterlevelTransform.position.z);
+        if (gameInitiated) {
+            waterlevelTransform.position = new Vector3(waterlevelTransform.position.x, waterlevelTransform.position.y + Time.deltaTime * waterRaiseSpeed * numOfLeakings, waterlevelTransform.position.z);
 
-        if (waterlevelTransform.position.y >= acdc.transform.position.y)
-            gameOver();
+            if (waterlevelTransform.position.y >= acdc.transform.position.y)
+                gameOver();
+        }
+
     }
 
 
     private void gameOver() {
         Time.timeScale = 0f;
+        gameOverScreen.SetActive(true);
     }
 
 }

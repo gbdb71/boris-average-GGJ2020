@@ -39,11 +39,4 @@ public class GameOverScreen : MonoBehaviour
     public void GameRestart() {
         animator.SetTrigger("Fade_Out");
     }
-
-    public void Update() {
-        if(Input.GetKeyDown(KeyCode.Space))
-        {
-            GameOver(232);
-		}
-    }
 }

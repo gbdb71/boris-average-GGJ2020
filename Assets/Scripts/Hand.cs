@@ -97,16 +97,16 @@ public class Hand : MonoBehaviour
         switch (handType)
         {
             case toolType.Empty:
-                timer = 0;
-                break;
-            case toolType.Tape:
-                timer = 2;
+                timer = 1;
                 break;
             case toolType.Gum:
                 timer = 1;
                 break;
             case toolType.Sock:
                 timer = 1.5f;
+                break;
+            case toolType.Tape:
+                timer = 2;
                 break;
 
         }
@@ -121,13 +121,13 @@ public class Hand : MonoBehaviour
             case toolType.Empty:
                 Instantiate(blockPrefabs[0], blockerPosition, Quaternion.identity);
                 break;
-            case toolType.Tape:
+            case toolType.Gum:
                 Instantiate(blockPrefabs[1], blockerPosition, Quaternion.identity);
                 break;
-            case toolType.Gum:
+            case toolType.Sock:
                 Instantiate(blockPrefabs[2], blockerPosition, Quaternion.identity);
                 break;
-            case toolType.Sock:
+            case toolType.Tape:
                 Instantiate(blockPrefabs[3], blockerPosition, Quaternion.identity);
                 break;
         }
@@ -139,16 +139,16 @@ public class Hand : MonoBehaviour
         switch (index)
         {
             case 0:
-                handType = toolType.Empty;
+                handType = toolType.Gum;
                 break;
             case 1:
-                handType = toolType.Tape;
+                handType = toolType.Gum;
                 break;
             case 2:
                 handType = toolType.Sock;
                 break;
             case 3:
-                handType = toolType.Gum;
+                handType = toolType.Tape;
                 break;
             default:
                 break;
