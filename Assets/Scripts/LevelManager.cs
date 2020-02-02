@@ -16,6 +16,8 @@ public class LevelManager : MonoBehaviour
     public GameObject acdc;
     public HandsManager handsManagerScript;
     public GameObject gameOverScreen;
+    public GameOverScreen gameoverScript;
+    
 
     public float spawnDelay;
     private Transform waterlevelTransform;
@@ -25,10 +27,13 @@ public class LevelManager : MonoBehaviour
 
     public void InitGame()
     {
+        Debug.Log("afasdf");
+        Cursor.visible = false;
         gameInitiated = false;
         waterlevelTransform = waterLevel.transform;
+        gameOverScreen.SetActive(false);
 
-        Time.timeScale = 1f;
+        Time.timeScale = 8f;
         score = 0;
         numOfLeakings = 0;
         timerScript.StartTimer();
@@ -72,7 +77,9 @@ public class LevelManager : MonoBehaviour
 
     private void gameOver() {
         Time.timeScale = 0f;
+        gameoverScript.UpdateText(timerScript.getScore());
         gameOverScreen.SetActive(true);
+        Cursor.visible = true;
     }
 
 }

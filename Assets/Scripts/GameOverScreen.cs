@@ -12,19 +12,19 @@ public class GameOverScreen : MonoBehaviour
     [Header("Text")]
     public TextMeshProUGUI textScore = null;
 
-    public void GameOver()
+  /*  public void GameOver()
     {
         GameOver(0);
-    }
+    }*/
         
-    public void GameOver(float score)
+   /* public void GameOver(float score)
     {
         animator.SetTrigger("Fade_In");
         UpdateText(score);
-    }
+    }*/
 
 
-    private void UpdateText(float score)
+    public void UpdateText(float score)
     {
         float seconds = score % 60;
         float minutes = ((int)(score / 60) % 60);
@@ -36,7 +36,7 @@ public class GameOverScreen : MonoBehaviour
         textScore.text = "";
     } 
 
-    public void GameRestart() {
+   /* public void GameRestart() {
         animator.SetTrigger("Fade_Out");
-    }
+    }*/
 }
