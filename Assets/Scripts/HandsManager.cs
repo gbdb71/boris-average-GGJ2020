@@ -7,6 +7,9 @@ public class HandsManager : MonoBehaviour
     public GameObject leftHand;
     public GameObject rightHand;
 
+    public float initialZ;
+    public float zValue;
+
     private Transform handsTransform;
     private Transform lefHandTransform;
     private Transform rightHandTransform;
@@ -30,7 +33,7 @@ public class HandsManager : MonoBehaviour
         if (Input.GetMouseButton(0) && !leftHandLocked) {
           //  Debug.Log("Left Hand Locked");
             leftHandLocked = true;
-            lefHandTransform.position = new Vector3(lefHandTransform.position.x, lefHandTransform.position.y, lefHandTransform.position.z + 1.8f);
+            lefHandTransform.position = new Vector3(lefHandTransform.position.x, lefHandTransform.position.y, lefHandTransform.position.z + zValue);
             leftHand.transform.parent = null;
         }
 
@@ -38,14 +41,14 @@ public class HandsManager : MonoBehaviour
         {
            // Debug.Log("Left Hand Released");
             leftHandLocked = false;
-            lefHandTransform.position = new Vector3(lefHandTransform.position.x, lefHandTransform.position.y, lefHandTransform.position.z - 1.8f);
+            lefHandTransform.position = new Vector3(lefHandTransform.position.x, lefHandTransform.position.y, lefHandTransform.position.z - zValue);
             leftHand.transform.parent = handsTransform;
         }
 
         if (Input.GetMouseButton(1) && !rightHandLocked) {
             //Debug.Log("Right Hand Locked");
             rightHandLocked = true;
-            rightHandTransform.position = new Vector3(rightHandTransform.position.x, rightHandTransform.position.y, rightHandTransform.position.z + 1.8f);
+            rightHandTransform.position = new Vector3(rightHandTransform.position.x, rightHandTransform.position.y, rightHandTransform.position.z + zValue);
             rightHand.transform.parent = null;
         }
 
@@ -53,11 +56,11 @@ public class HandsManager : MonoBehaviour
         {
             //Debug.Log("Right Hand Released");
             rightHandLocked = false;
-            rightHandTransform.position = new Vector3(rightHandTransform.position.x, rightHandTransform.position.y, rightHandTransform.position.z - 1.8f);
+            rightHandTransform.position = new Vector3(rightHandTransform.position.x, rightHandTransform.position.y, rightHandTransform.position.z - zValue);
             rightHand.transform.parent = handsTransform;
         }
 
-        Vector3 worldPosition = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 3));
+        Vector3 worldPosition = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, initialZ));
         handsTransform.position = worldPosition;
     }
 

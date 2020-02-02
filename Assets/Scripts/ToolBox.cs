@@ -7,7 +7,6 @@ public class ToolBox : MonoBehaviour
 {
 
     [Header("Meshes")]
-    public List<Mesh> meshes = new List<Mesh>();
     public List<int> weights = new List<int>();
 
     [Header("Logic")]
@@ -40,35 +39,15 @@ public class ToolBox : MonoBehaviour
                 return index;
 			}
         }
-        assignNewToolType(accumulatedWeights.Count - 1);
+        
         return accumulatedWeights.Count - 1;
     }
 
-    public Mesh SetNextTool() {
-       return meshes[GetNextIndex()];
+    public int SetNextTool() {
+       return GetNextIndex();
     }
 
-    public Mesh SetNextTool(int index) {
+ /*   public Mesh SetNextTool(int index) {
        return meshes[index];
-    }
-
-    private void assignNewToolType(int index) {
-        switch (index)
-        { 
-            case 0: handType = toolType.Empty;
-                break;
-            case 1:
-                handType = toolType.Tape;
-                break;
-            case 2:
-                handType = toolType.Sock;
-                break;
-            case 3:
-                handType = toolType.Gum;
-                break;
-            default:
-                break;
-        }
-    }
-
+   }*/
 }

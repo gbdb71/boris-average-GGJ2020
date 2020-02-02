@@ -7,16 +7,17 @@ public class Hand : MonoBehaviour
     public enum toolType { Empty, Tape, Gum, Sock }
     public toolType handType = toolType.Tape;
     public float repairCounter = 0.0f;
+    public List<Mesh> handMeshes = new List<Mesh>();
     public GameObject[] blockPrefabs;
+    public MeshFilter meshFilter;
 
     private ToolBox toolBoxScript;
-    private MeshFilter meshFilter;
+    
     private bool leakBlocked = false;
 
     private void Start()
     {
         toolBoxScript = GetComponent<ToolBox>();
-        meshFilter = GetComponent<MeshFilter>();
 
         assignNewToolMesh();
     }
@@ -38,7 +39,7 @@ public class Hand : MonoBehaviour
             {
                 //print("b");
                 showLeakParticles(other.gameObject);
-                putNewBlocker();
+                putNewBlocker(other.gameObject.transform.position);
                 repairCounter = 0.0f;
                 destroyLeaking(other.gameObject);
                 assignNewToolMesh();
@@ -113,30 +114,52 @@ public class Hand : MonoBehaviour
         return timer;
     }
 
-    private void putNewBlocker()
+    private void putNewBlocker(Vector3 blockerPosition)
     {
         switch (handType)
         {
             case toolType.Empty:
-                Instantiate(blockPrefabs[0], this.transform.position, Quaternion.identity);
+                Instantiate(blockPrefabs[0], blockerPosition, Quaternion.identity);
                 break;
             case toolType.Tape:
-                Instantiate(blockPrefabs[1], this.transform.position, Quaternion.identity);
+                Instantiate(blockPrefabs[1], blockerPosition, Quaternion.identity);
                 break;
             case toolType.Gum:
-                Instantiate(blockPrefabs[2], this.transform.position, Quaternion.identity);
+                Instantiate(blockPrefabs[2], blockerPosition, Quaternion.identity);
                 break;
             case toolType.Sock:
-                Instantiate(blockPrefabs[3], this.transform.position, Quaternion.identity);
+                Instantiate(blockPrefabs[3], blockerPosition, Quaternion.identity);
                 break;
         }
 
     }
 
+    private void assignNewToolType(int index)
+    {
+        switch (index)
+        {
+            case 0:
+                handType = toolType.Empty;
+                break;
+            case 1:
+                handType = toolType.Tape;
+                break;
+            case 2:
+                handType = toolType.Sock;
+                break;
+            case 3:
+                handType = toolType.Gum;
+                break;
+            default:
+                break;
+        }
+    }
+
     private void assignNewToolMesh()
     {
-        meshFilter.mesh = toolBoxScript.SetNextTool();
-//handType = toolBoxScript.handType;
+        int newIndex = toolBoxScript.SetNextTool();
+        assignNewToolType(newIndex);
+        meshFilter.mesh = handMeshes[newIndex];
     }
 
 }
