@@ -56,4 +56,8 @@ public class Timer : MonoBehaviour
         isActive = !isActive;
         UpdateText();
     }
+
+    public float getScore() {
+        return timer;
+    }
 }
