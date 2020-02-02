@@ -26,6 +26,8 @@ public class HandsManager : MonoBehaviour
         lefHandTransform = leftHand.transform;
         rightHandTransform = rightHand.transform;
 
+        lefHandTransform.localPosition = new Vector3(-1, 0, 0);
+        rightHandTransform.localPosition = new Vector3(1, 0, 0);
     }
 
     private void Update()

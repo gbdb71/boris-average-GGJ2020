@@ -10,6 +10,7 @@ public class Hand : MonoBehaviour
     public List<Mesh> handMeshes = new List<Mesh>();
     public GameObject[] blockPrefabs;
     public MeshFilter meshFilter;
+    public Transform toolsParent;
 
     private ToolBox toolBoxScript;
     
@@ -119,16 +120,16 @@ public class Hand : MonoBehaviour
         switch (handType)
         {
             case toolType.Empty:
-                Instantiate(blockPrefabs[0], blockerPosition, Quaternion.identity);
+                Instantiate(blockPrefabs[0], blockerPosition,Quaternion.identity, toolsParent);
                 break;
             case toolType.Gum:
-                Instantiate(blockPrefabs[1], blockerPosition, Quaternion.identity);
+                Instantiate(blockPrefabs[1], blockerPosition, Quaternion.identity, toolsParent);
                 break;
             case toolType.Sock:
-                Instantiate(blockPrefabs[2], blockerPosition, Quaternion.identity);
+                Instantiate(blockPrefabs[2], blockerPosition, Quaternion.identity, toolsParent);
                 break;
             case toolType.Tape:
-                Instantiate(blockPrefabs[3], blockerPosition, Quaternion.identity);
+                Instantiate(blockPrefabs[3], blockerPosition, Quaternion.identity, toolsParent);
                 break;
         }
 

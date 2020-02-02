@@ -13,11 +13,14 @@ public class LevelManager : MonoBehaviour
     public Timer timerScript;
 
     public GameObject waterLevel;
+    public Vector3 initialWaterLevel;
     public GameObject acdc;
     public HandsManager handsManagerScript;
     public GameObject gameOverScreen;
     public GameOverScreen gameoverScript;
-    
+    public AudioSource musicSource;
+    public Transform toolsParent;
+
 
     public float spawnDelay;
     private Transform waterlevelTransform;
@@ -27,21 +30,24 @@ public class LevelManager : MonoBehaviour
 
     public void InitGame()
     {
-        Debug.Log("afasdf");
         Cursor.visible = false;
         gameInitiated = false;
         waterlevelTransform = waterLevel.transform;
-        gameOverScreen.SetActive(false);
+        waterlevelTransform.localPosition = initialWaterLevel;
 
-        Time.timeScale = 8f;
+        gameOverScreen.SetActive(false);
+        Time.timeScale = 1f;
         score = 0;
         numOfLeakings = 0;
         timerScript.StartTimer();
+        spawnDelay = 5;
 
+        StopAllCoroutines();
         StartCoroutine(Spawner());
 
         gameInitiated = true;
         handsManagerScript.InitHandsmanager();
+        musicSource.Play();
     }
 
     IEnumerator Spawner()
@@ -66,9 +72,9 @@ public class LevelManager : MonoBehaviour
     private void Update()
     {
         if (gameInitiated) {
-            waterlevelTransform.position = new Vector3(waterlevelTransform.position.x, waterlevelTransform.position.y + Time.deltaTime * waterRaiseSpeed * numOfLeakings, waterlevelTransform.position.z);
+            waterlevelTransform.localPosition = new Vector3(waterlevelTransform.localPosition.x, waterlevelTransform.localPosition.y + Time.deltaTime * waterRaiseSpeed * numOfLeakings, initialWaterLevel.z);
 
-            if (waterlevelTransform.position.y >= acdc.transform.position.y)
+            if (waterlevelTransform.position.y >= acdc.transform.position.y && gameInitiated == true)
                 gameOver();
         }
 
@@ -76,10 +82,25 @@ public class LevelManager : MonoBehaviour
 
 
     private void gameOver() {
-        Time.timeScale = 0f;
-        gameoverScript.UpdateText(timerScript.getScore());
-        gameOverScreen.SetActive(true);
-        Cursor.visible = true;
+
+        if (gameInitiated) {
+            gameInitiated = false;
+            musicSource.Stop();
+            Time.timeScale = 0f;
+            gameoverScript.UpdateText(timerScript.getScore());
+            gameOverScreen.SetActive(true);
+            Cursor.visible = true;
+
+            foreach (Transform child in leakingsParent.transform)
+            {
+                GameObject.Destroy(child.gameObject);
+            }
+
+            foreach (Transform child in toolsParent.transform)
+            {
+                GameObject.Destroy(child.gameObject);
+            }
+        }
     }
 
 }
