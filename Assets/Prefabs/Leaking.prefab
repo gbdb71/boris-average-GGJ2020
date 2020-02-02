@@ -116,7 +116,7 @@ PrefabInstance:
     - target: {fileID: 9189305799876940692, guid: 556b9b034ded140de9024b7a9a22ef26,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -0.45
       objectReference: {fileID: 0}
     - target: {fileID: 9189305799876940692, guid: 556b9b034ded140de9024b7a9a22ef26,
         type: 3}
@@ -177,6 +177,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: leak_particle
+      objectReference: {fileID: 0}
+    - target: {fileID: 6668178876184052643, guid: a4bab4c29b02e4a92a35a5092b61116c,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6668178876184052670, guid: a4bab4c29b02e4a92a35a5092b61116c,
         type: 3}
